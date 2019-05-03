@@ -4,12 +4,13 @@ import (
 	"context"
 	"sync"
 
-	"github.com/giantswarm/circleci-exporter/flag"
-	"github.com/giantswarm/circleci-exporter/service/collector"
 	"github.com/giantswarm/microendpoint/service/version"
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/micrologger"
 	"github.com/spf13/viper"
+
+	"github.com/giantswarm/circleci-exporter/flag"
+	"github.com/giantswarm/circleci-exporter/service/collector"
 )
 
 type Config struct {

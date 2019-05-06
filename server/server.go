@@ -90,8 +90,7 @@ func New(config Config) (*Server, error) {
 
 func (s *Server) Boot() {
 	s.bootOnce.Do(func() {
-		// Here goes your custom boot logic for your server/endpoint/middleware, if
-		// any.
+		// Here goes your custom boot logic for your server/endpoint/middleware, if any.
 	})
 }
 

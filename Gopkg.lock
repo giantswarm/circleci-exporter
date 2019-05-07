@@ -168,6 +168,14 @@
   version = "v1.0"
 
 [[projects]]
+  digest = "1:20c9a48bf528c74416f1f66bef064e287dc3e181469552f7165ff5c470438a0f"
+  name = "github.com/jszwedko/go-circleci"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0150d5f69b6fec5b54c699c832e1d6962c739529"
+  version = "v0.2.0"
+
+[[projects]]
   branch = "master"
   digest = "1:926b6084b81f49359f67e48ef8b74f33ea8509afe8410d3b34789eaea02da898"
   name = "github.com/juju/errgo"
@@ -387,6 +395,7 @@
     "github.com/giantswarm/microkit/flag",
     "github.com/giantswarm/microkit/server",
     "github.com/giantswarm/micrologger",
+    "github.com/jszwedko/go-circleci",
     "github.com/prometheus/client_golang/prometheus",
     "github.com/spf13/viper",
   ]

@@ -3,27 +3,34 @@ package collector
 import (
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/micrologger"
+	"github.com/jszwedko/go-circleci"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
 // BuildConfig is this collector's configuration struct.
 type BuildConfig struct {
-	Logger micrologger.Logger
+	CircleCIClient *circleci.Client
+	Logger         micrologger.Logger
 }
 
 // Build is the main struct for this collector.
 type Build struct {
-	logger micrologger.Logger
+	circleCIClient *circleci.Client
+	logger         micrologger.Logger
 }
 
 // NewAppResource creates a new Build metrics collector
 func NewBuild(config BuildConfig) (*Build, error) {
+	if config.CircleCIClient == nil {
+		return nil, microerror.Maskf(invalidConfigError, "%T.CircleCIClient must not be empty", config)
+	}
 	if config.Logger == nil {
 		return nil, microerror.Maskf(invalidConfigError, "%T.Logger must not be empty", config)
 	}
 
 	c := &Build{
-		logger: config.Logger,
+		circleCIClient: config.CircleCIClient,
+		logger:         config.Logger,
 	}
 
 	return c, nil

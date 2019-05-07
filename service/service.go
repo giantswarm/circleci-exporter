@@ -7,6 +7,7 @@ import (
 	"github.com/giantswarm/microendpoint/service/version"
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/micrologger"
+	"github.com/jszwedko/go-circleci"
 	"github.com/spf13/viper"
 
 	"github.com/giantswarm/circleci-exporter/flag"
@@ -47,10 +48,16 @@ func New(config Config) (*Service, error) {
 
 	var err error
 
+	var circleCIClient *circleci.Client
+	{
+		circleCIClient = &circleci.Client{Token: config.Viper.GetString(config.Flag.Service.CircleCI.Auth.Token)}
+	}
+
 	var exporterCollector *collector.Set
 	{
 		c := collector.SetConfig{
-			Logger: config.Logger,
+			CircleCIClient: circleCIClient,
+			Logger:         config.Logger,
 		}
 
 		exporterCollector, err = collector.NewSet(c)

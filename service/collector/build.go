@@ -23,7 +23,7 @@ var (
 var (
 	buildDesc = prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
-			Name:    prometheus.BuildFQName(namespace, subsystem, "labels_buildtime"),
+			Name:    prometheus.BuildFQName(namespace, subsystem, "buildtime"),
 			Help:    "circle CI build time duration.",
 			Buckets: prometheus.ExponentialBuckets(bucketStart, bucketFactor, numBuckets),
 		},
@@ -87,7 +87,9 @@ func (c *Build) Collect(ch chan<- prometheus.Metric) error {
 		repo := build.Reponame
 		status := build.Status
 
-		buildDesc.WithLabelValues(branch, repo, status).Observe(float64(*build.BuildTimeMillis))
+		if build.BuildTimeMillis != nil {
+			buildDesc.WithLabelValues(branch, repo, status).Observe(float64(*build.BuildTimeMillis))
+		}
 
 		{
 			k := key{

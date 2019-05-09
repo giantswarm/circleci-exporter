@@ -12,6 +12,7 @@ const (
 )
 
 const (
+	numBuilds    = 100
 	bucketStart  = 15000
 	bucketFactor = 2
 	numBuckets   = 8

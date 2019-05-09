@@ -76,7 +76,7 @@ func NewBuild(config BuildConfig) (*Build, error) {
 
 // Collect is the main metrics collection function.
 func (c *Build) Collect(ch chan<- prometheus.Metric) error {
-	builds, err := c.circleCIClient.ListRecentBuilds(100, 0)
+	builds, err := c.circleCIClient.ListRecentBuilds(numBuilds, 0)
 	if err != nil {
 		return microerror.Mask(err)
 	}

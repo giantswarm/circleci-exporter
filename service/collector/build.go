@@ -9,7 +9,7 @@ import (
 
 var (
 	buildLabelDesc *prometheus.Desc = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, subsystem, "build"),
+		prometheus.BuildFQName(namespace, subsystem, "build_info"),
 		"circle CI build labels.",
 		[]string{
 			labelBranch,
@@ -23,7 +23,7 @@ var (
 var (
 	buildDesc = prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
-			Name:    prometheus.BuildFQName(namespace, subsystem, "buildtime"),
+			Name:    prometheus.BuildFQName(namespace, subsystem, "build_time_seconds"),
 			Help:    "circle CI build time duration.",
 			Buckets: prometheus.ExponentialBuckets(bucketStart, bucketFactor, numBuckets),
 		},

@@ -4,10 +4,12 @@ import (
 	"github.com/giantswarm/exporterkit/collector"
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/micrologger"
+	"github.com/jszwedko/go-circleci"
 )
 
 type SetConfig struct {
-	Logger micrologger.Logger
+	CircleCIClient *circleci.Client
+	Logger         micrologger.Logger
 
 	CustomLabels []string
 }
@@ -25,7 +27,8 @@ func NewSet(config SetConfig) (*Set, error) {
 	var buildCollector *Build
 	{
 		c := BuildConfig{
-			Logger: config.Logger,
+			CircleCIClient: config.CircleCIClient,
+			Logger:         config.Logger,
 		}
 
 		buildCollector, err = NewBuild(c)
